@@ -12,18 +12,22 @@ export class CreatorSocialService {
     @InjectModel(CreatorSocial)
     private readonly creatorSocialModel: typeof CreatorSocial,
     private readonly AdminServis: AdminService,
-    private readonly SocialServis: SocialService
+    private readonly SocialServis: SocialService,
   ) {}
 
   async create(createCreatorSocialDto: CreateCreatorSocialDto) {
     try {
-      const admin = await this.AdminServis.findOneADMIN(createCreatorSocialDto.creator_id)
+      const admin = await this.AdminServis.findOneADMIN(
+        createCreatorSocialDto.creator_id,
+      );
       if (!admin) {
-        throw new NotFoundException(`bunday ${admin} id li admin topilmadi`)
+        throw new NotFoundException(`bunday ${admin} id li admin topilmadi`);
       }
-      const social = await this.SocialServis.findOneSOCIAL(createCreatorSocialDto.social_id)
+      const social = await this.SocialServis.findOneSOCIAL(
+        createCreatorSocialDto.social_id,
+      );
       if (!social) {
-        throw new NotFoundException(`bunday ${admin} id li social topilmadi`)
+        throw new NotFoundException(`bunday ${admin} id li social topilmadi`);
       }
       return await this.creatorSocialModel.create(createCreatorSocialDto);
     } catch (error) {

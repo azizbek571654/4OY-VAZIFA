@@ -1,4 +1,11 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { Admin } from '../../admin/model/admin.model';
 
 @Table({ tableName: 'Notifications' })
@@ -14,10 +21,10 @@ export class Notification extends Model<
   })
   user_id: number;
   @BelongsTo(() => Admin, {
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    })
-    admin: Admin;
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  admin: Admin;
 
   @Column({
     type: DataType.STRING,

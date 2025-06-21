@@ -17,6 +17,13 @@ import { CreatorSocialModule } from './creator-social/creator-social.module';
 import { Notification } from './notifications/model/notification.model';
 import { CreatorSocial } from './creator-social/model/creator-social.model';
 import { Donation } from './donations/model/donation.model';
+import { RolesModule } from './roles/roles.module';
+import { Roles } from './roles/model/role.model';
+import { UserRole } from './admin/model/user-role.model';
+import { ProductModule } from './product/product.module';
+import { ProductImegsModule } from './product-imegs/product-imegs.module';
+import { Product } from './product/model/product.model';
+import { ProductImeg } from './product-imegs/model/product-imeg.model';
 
 @Module({
   imports: [
@@ -34,7 +41,19 @@ import { Donation } from './donations/model/donation.model';
       autoLoadModels: true,
       synchronize: true,
       logging: false,
-      models: [Admin, Kurier, Social, Category, Notification, CreatorSocial, Donation],
+      models: [
+        Admin,
+        Kurier,
+        Social,
+        Category,
+        Notification,
+        CreatorSocial,
+        Donation,
+        Roles,
+        UserRole,
+        Product,
+        ProductImeg
+      ],
     }),
     AdminModule,
     KurierModule,
@@ -43,6 +62,9 @@ import { Donation } from './donations/model/donation.model';
     DonationsModule,
     NotificationsModule,
     CreatorSocialModule,
+    RolesModule,
+    ProductModule,
+    ProductImegsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

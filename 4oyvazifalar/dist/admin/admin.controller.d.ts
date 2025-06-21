@@ -4,11 +4,29 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 export declare class AdminController {
     private readonly adminService;
     constructor(adminService: AdminService);
-    create(createAdminDto: CreateAdminDto): Promise<import("./model/admin.model").Admin | "admin yaratilmadi">;
-    findAll(): Promise<import("./model/admin.model").Admin[] | "adminlar topilmadi">;
-    findOne(id: string): Promise<import("./model/admin.model").Admin | "admin topilmadi" | null>;
-    update(id: string, updateAdminDto: UpdateAdminDto): Promise<import("./model/admin.model").Admin | "admin topilmadi">;
-    remove(id: string): Promise<"admin topilmadi" | {
+    create(createAdminDto: CreateAdminDto): Promise<{
+        success: boolean;
+        message: string;
+        data: import("./model/admin.model").Admin;
+    }>;
+    findAll(): Promise<{
+        success: boolean;
+        message: string;
+        count: number;
+        data: import("./model/admin.model").Admin[];
+    }>;
+    findOne(id: string): Promise<{
+        success: boolean;
+        message: string;
+        data: import("./model/admin.model").Admin;
+    }>;
+    update(id: string, updateAdminDto: UpdateAdminDto): Promise<{
+        success: boolean;
+        message: string;
+        data: import("./model/admin.model").Admin;
+    }>;
+    remove(id: string): Promise<{
+        success: boolean;
         message: string;
     }>;
 }

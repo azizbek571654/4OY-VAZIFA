@@ -29,7 +29,7 @@ export class CategoriesService {
     }
   }
 
-  async findOne(id: number) {
+  async findOneCATEGORY(id: number) {
     try {
       return await this.CategoryModel.findByPk(id);
     } catch (error) {

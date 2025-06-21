@@ -1,7 +1,17 @@
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { CreatorSocial } from '../../creator-social/model/creator-social.model';
 import { Donation } from '../../donations/model/donation.model';
 import { Notification } from '../../notifications/model/notification.model';
+import { Roles } from '../../roles/model/role.model';
+import { UserRole } from './user-role.model';
+import { Product } from '../../product/model/product.model';
 
 @Table({ tableName: 'admins' })
 export class Admin extends Model<
@@ -34,12 +44,18 @@ export class Admin extends Model<
   })
   role: string;
 
-    @HasMany(() =>CreatorSocial)
-    creatorSocial: CreatorSocial
-    
-    @HasMany(() =>Donation)
-    donation: Donation
-    
-    @HasMany(() => Notification)
-    notification: Notification
-  }
+  @HasMany(() => CreatorSocial)
+  creatorSocial: CreatorSocial;
+
+  @HasMany(() => Donation)
+  donation: Donation;
+
+  @HasMany(() => Notification)
+  notification: Notification;
+
+  @BelongsToMany(() => Roles, () => UserRole)
+  Roles: Roles[];
+
+  @HasMany(() => Product)
+  product: Product;
+}

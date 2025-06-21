@@ -29,7 +29,7 @@ let CategoriesController = class CategoriesController {
         return this.categoriesService.findAll();
     }
     findOne(id) {
-        return this.categoriesService.findOne(+id);
+        return this.categoriesService.findOneCATEGORY(+id);
     }
     update(id, updateCategoryDto) {
         return this.categoriesService.update(+id, updateCategoryDto);

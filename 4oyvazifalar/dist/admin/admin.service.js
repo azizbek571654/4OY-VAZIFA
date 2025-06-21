@@ -16,61 +16,133 @@ exports.AdminService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const admin_model_1 = require("./model/admin.model");
+const roles_service_1 = require("../roles/roles.service");
 let AdminService = class AdminService {
     AdminModel;
-    constructor(AdminModel) {
+    rolesService;
+    constructor(AdminModel, rolesService) {
         this.AdminModel = AdminModel;
+        this.rolesService = rolesService;
     }
     async create(createAdminDto) {
         try {
-            return await this.AdminModel.create(createAdminDto);
+            const role = await this.rolesService.findRoleByValue(createAdminDto.role);
+            if (!role) {
+                throw new common_1.HttpException({
+                    success: false,
+                    message: 'role topilmadi',
+                }, common_1.HttpStatus.NOT_FOUND);
+            }
+            const newAdmin = await this.AdminModel.create(createAdminDto);
+            await newAdmin.$set('Roles', role.id);
+            await newAdmin.save();
+            return {
+                success: true,
+                message: 'Admin yaratildi',
+                data: newAdmin,
+            };
         }
         catch (error) {
             console.error(error);
-            return 'admin yaratilmadi';
+            if (error instanceof common_1.HttpException) {
+                throw error;
+            }
+            throw new common_1.HttpException({
+                success: false,
+                message: 'Admin yaratilmadi',
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async findAll() {
         try {
-            return await this.AdminModel.findAll();
+            const admins = await this.AdminModel.findAll();
+            return {
+                success: true,
+                message: 'Barcha adminlar',
+                count: admins.length,
+                data: admins,
+            };
         }
         catch (error) {
-            console.error(error);
-            return 'adminlar topilmadi';
+            throw new common_1.HttpException({
+                success: false,
+                message: 'Adminlar topilmadi',
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async findOneADMIN(id) {
         try {
-            return await this.AdminModel.findByPk(id);
+            const admin = await this.AdminModel.findByPk(id);
+            if (!admin) {
+                throw new common_1.HttpException({
+                    success: false,
+                    message: 'Admin topilmadi',
+                }, common_1.HttpStatus.NOT_FOUND);
+            }
+            return {
+                success: true,
+                message: 'Admin topildi',
+                data: admin,
+            };
         }
         catch (error) {
             console.error(error);
-            return 'admin topilmadi';
+            throw error instanceof common_1.HttpException
+                ? error
+                : new common_1.HttpException({
+                    success: false,
+                    message: 'Adminni olishda xatolik',
+                }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async update(id, updateAdminDto) {
         try {
             const admin = await this.AdminModel.findByPk(id);
-            if (!admin)
-                return `admin topilmadi`;
-            return await admin.update(updateAdminDto);
+            if (!admin) {
+                throw new common_1.HttpException({
+                    success: false,
+                    message: 'Admin topilmadi',
+                }, common_1.HttpStatus.NOT_FOUND);
+            }
+            const updated = await admin.update(updateAdminDto);
+            return {
+                success: true,
+                message: 'Admin yangilandi',
+                data: updated,
+            };
         }
         catch (error) {
             console.error(error);
-            return 'admin topilmadi';
+            throw error instanceof common_1.HttpException
+                ? error
+                : new common_1.HttpException({
+                    success: false,
+                    message: 'Admin yangilanmadi',
+                }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async remove(id) {
         try {
             const admin = await this.AdminModel.findByPk(id);
-            if (!admin)
-                return `admin topilmadi`;
+            if (!admin) {
+                throw new common_1.HttpException({
+                    success: false,
+                    message: 'Admin topilmadi',
+                }, common_1.HttpStatus.NOT_FOUND);
+            }
             await admin.destroy();
-            return { message: 'Deleted successfully' };
+            return {
+                success: true,
+                message: 'Admin ochirildi',
+            };
         }
         catch (error) {
-            console.error(error);
-            return 'admin topilmadi';
+            throw error instanceof common_1.HttpException
+                ? error
+                : new common_1.HttpException({
+                    success: false,
+                    message: 'Adminni ochirishda xatolik',
+                }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 };
@@ -78,6 +150,6 @@ exports.AdminService = AdminService;
 exports.AdminService = AdminService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, sequelize_1.InjectModel)(admin_model_1.Admin)),
-    __metadata("design:paramtypes", [Object])
+    __metadata("design:paramtypes", [Object, roles_service_1.RolesService])
 ], AdminService);
 //# sourceMappingURL=admin.service.js.map

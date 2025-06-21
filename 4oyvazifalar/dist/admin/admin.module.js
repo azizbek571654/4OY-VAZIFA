@@ -12,14 +12,13 @@ const admin_service_1 = require("./admin.service");
 const admin_controller_1 = require("./admin.controller");
 const sequelize_1 = require("@nestjs/sequelize");
 const admin_model_1 = require("./model/admin.model");
-const creator_social_model_1 = require("../creator-social/model/creator-social.model");
-const donation_model_1 = require("../donations/model/donation.model");
+const roles_module_1 = require("../roles/roles.module");
 let AdminModule = class AdminModule {
 };
 exports.AdminModule = AdminModule;
 exports.AdminModule = AdminModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([admin_model_1.Admin, creator_social_model_1.CreatorSocial, donation_model_1.Donation, admin_model_1.Admin])],
+        imports: [sequelize_1.SequelizeModule.forFeature([admin_model_1.Admin]), roles_module_1.RolesModule],
         controllers: [admin_controller_1.AdminController],
         providers: [admin_service_1.AdminService],
         exports: [admin_service_1.AdminService],

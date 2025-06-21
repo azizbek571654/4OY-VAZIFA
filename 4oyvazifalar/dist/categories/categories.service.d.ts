@@ -6,7 +6,7 @@ export declare class CategoriesService {
     constructor(CategoryModel: typeof Category);
     create(createCategoryDto: CreateCategoryDto): Promise<Category | "Category yaratilmadi">;
     findAll(): Promise<Category[] | "Categorylar topilmadi">;
-    findOne(id: number): Promise<Category | "category topilmadi" | null>;
+    findOneCATEGORY(id: number): Promise<Category | "category topilmadi" | null>;
     update(id: number, updateCategoryDto: UpdateCategoryDto): Promise<Category | "category topilmadi">;
     remove(id: number): Promise<"category topilmadi" | {
         message: string;

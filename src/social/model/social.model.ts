@@ -1,16 +1,10 @@
-import {
-  Column,
-  DataType,
-  HasMany,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { CreatorSocial } from '../../creator-social/model/creator-social.model';
 
 @Table({ tableName: 'social' })
 export class Social extends Model<
   Social,
-  { title: string; description: string;}
+  { title: string; description: string }
 > {
   @Column({
     type: DataType.STRING,
@@ -26,5 +20,5 @@ export class Social extends Model<
   description: string;
 
   @HasMany(() => CreatorSocial)
-  creatorSocial: CreatorSocial
+  creatorSocial: CreatorSocial;
 }

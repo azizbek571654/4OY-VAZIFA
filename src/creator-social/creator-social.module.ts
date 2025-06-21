@@ -9,7 +9,11 @@ import { Social } from '../social/model/social.model';
 import { SocialModule } from '../social/social.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([CreatorSocial, Admin, Social]), AdminModule, SocialModule],
+  imports: [
+    SequelizeModule.forFeature([CreatorSocial, Admin, Social]),
+    AdminModule,
+    SocialModule,
+  ],
   controllers: [CreatorSocialController],
   providers: [CreatorSocialService],
   exports: [CreatorSocialService],

@@ -1,4 +1,11 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { Admin } from '../../admin/model/admin.model';
 
 @Table({ tableName: 'Donations' })
@@ -24,7 +31,7 @@ export class Donation extends Model<
     onUpdate: 'CASCADE',
   })
   admin: Admin;
-  
+
   @ForeignKey(() => Admin)
   @Column({
     type: DataType.BIGINT,

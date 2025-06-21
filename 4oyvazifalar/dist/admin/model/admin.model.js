@@ -14,6 +14,9 @@ const sequelize_typescript_1 = require("sequelize-typescript");
 const creator_social_model_1 = require("../../creator-social/model/creator-social.model");
 const donation_model_1 = require("../../donations/model/donation.model");
 const notification_model_1 = require("../../notifications/model/notification.model");
+const role_model_1 = require("../../roles/model/role.model");
+const user_role_model_1 = require("./user-role.model");
+const product_model_1 = require("../../product/model/product.model");
 let Admin = class Admin extends sequelize_typescript_1.Model {
     username;
     email;
@@ -22,6 +25,8 @@ let Admin = class Admin extends sequelize_typescript_1.Model {
     creatorSocial;
     donation;
     notification;
+    Roles;
+    product;
 };
 exports.Admin = Admin;
 __decorate([
@@ -66,6 +71,14 @@ __decorate([
     (0, sequelize_typescript_1.HasMany)(() => notification_model_1.Notification),
     __metadata("design:type", notification_model_1.Notification)
 ], Admin.prototype, "notification", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsToMany)(() => role_model_1.Roles, () => user_role_model_1.UserRole),
+    __metadata("design:type", Array)
+], Admin.prototype, "Roles", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => product_model_1.Product),
+    __metadata("design:type", product_model_1.Product)
+], Admin.prototype, "product", void 0);
 exports.Admin = Admin = __decorate([
     (0, sequelize_typescript_1.Table)({ tableName: 'admins' })
 ], Admin);

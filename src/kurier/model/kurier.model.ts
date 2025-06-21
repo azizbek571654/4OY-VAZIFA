@@ -31,5 +31,4 @@ export class Kurier extends Model<
     allowNull: false,
   })
   status: string;
-
 }

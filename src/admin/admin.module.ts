@@ -3,11 +3,10 @@ import { AdminService } from './admin.service';
 import { AdminController } from './admin.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Admin } from './model/admin.model';
-import { CreatorSocial } from '../creator-social/model/creator-social.model';
-import { Donation } from '../donations/model/donation.model';
+import { RolesModule } from '../roles/roles.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Admin, CreatorSocial, Donation, Admin])],
+  imports: [SequelizeModule.forFeature([Admin]), RolesModule],
   controllers: [AdminController],
   providers: [AdminService],
   exports: [AdminService],

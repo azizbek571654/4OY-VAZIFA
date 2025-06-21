@@ -21,7 +21,11 @@ let CreatorSocialModule = class CreatorSocialModule {
 exports.CreatorSocialModule = CreatorSocialModule;
 exports.CreatorSocialModule = CreatorSocialModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([creator_social_model_1.CreatorSocial, admin_model_1.Admin, social_model_1.Social]), admin_module_1.AdminModule, social_module_1.SocialModule],
+        imports: [
+            sequelize_1.SequelizeModule.forFeature([creator_social_model_1.CreatorSocial, admin_model_1.Admin, social_model_1.Social]),
+            admin_module_1.AdminModule,
+            social_module_1.SocialModule,
+        ],
         controllers: [creator_social_controller_1.CreatorSocialController],
         providers: [creator_social_service_1.CreatorSocialService],
         exports: [creator_social_service_1.CreatorSocialService],

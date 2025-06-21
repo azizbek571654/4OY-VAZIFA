@@ -14,7 +14,6 @@ export class CreatorSocial extends Model<
   CreatorSocial,
   { creator_id: number; social_id: number; url: string }
 > {
-
   @ForeignKey(() => Admin)
   @Column({
     type: DataType.BIGINT,
@@ -27,8 +26,6 @@ export class CreatorSocial extends Model<
     onUpdate: 'CASCADE',
   })
   admin: Admin;
-  
-
 
   @ForeignKey(() => Social)
   @Column({
@@ -41,10 +38,8 @@ export class CreatorSocial extends Model<
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  social: Social
+  social: Social;
 
-
-  
   @Column({
     type: DataType.STRING,
     allowNull: false,

@@ -39,7 +39,7 @@ let CategoriesService = class CategoriesService {
             return 'Categorylar topilmadi';
         }
     }
-    async findOne(id) {
+    async findOneCATEGORY(id) {
         try {
             return await this.CategoryModel.findByPk(id);
         }

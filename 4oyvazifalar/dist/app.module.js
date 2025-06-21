@@ -26,6 +26,13 @@ const creator_social_module_1 = require("./creator-social/creator-social.module"
 const notification_model_1 = require("./notifications/model/notification.model");
 const creator_social_model_1 = require("./creator-social/model/creator-social.model");
 const donation_model_1 = require("./donations/model/donation.model");
+const roles_module_1 = require("./roles/roles.module");
+const role_model_1 = require("./roles/model/role.model");
+const user_role_model_1 = require("./admin/model/user-role.model");
+const product_module_1 = require("./product/product.module");
+const product_imegs_module_1 = require("./product-imegs/product-imegs.module");
+const product_model_1 = require("./product/model/product.model");
+const product_imeg_model_1 = require("./product-imegs/model/product-imeg.model");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -46,7 +53,19 @@ exports.AppModule = AppModule = __decorate([
                 autoLoadModels: true,
                 synchronize: true,
                 logging: false,
-                models: [admin_model_1.Admin, kurier_model_1.Kurier, social_model_1.Social, category_model_1.Category, notification_model_1.Notification, creator_social_model_1.CreatorSocial, donation_model_1.Donation],
+                models: [
+                    admin_model_1.Admin,
+                    kurier_model_1.Kurier,
+                    social_model_1.Social,
+                    category_model_1.Category,
+                    notification_model_1.Notification,
+                    creator_social_model_1.CreatorSocial,
+                    donation_model_1.Donation,
+                    role_model_1.Roles,
+                    user_role_model_1.UserRole,
+                    product_model_1.Product,
+                    product_imeg_model_1.ProductImeg
+                ],
             }),
             admin_module_1.AdminModule,
             kurier_module_1.KurierModule,
@@ -55,6 +74,9 @@ exports.AppModule = AppModule = __decorate([
             donations_module_1.DonationsModule,
             notifications_module_1.NotificationsModule,
             creator_social_module_1.CreatorSocialModule,
+            roles_module_1.RolesModule,
+            product_module_1.ProductModule,
+            product_imegs_module_1.ProductImegsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

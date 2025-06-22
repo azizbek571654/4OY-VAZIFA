@@ -1,6 +1,16 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAdminDto = void 0;
+const class_validator_1 = require("class-validator");
 class CreateAdminDto {
     username;
     email;
@@ -8,4 +18,31 @@ class CreateAdminDto {
     role;
 }
 exports.CreateAdminDto = CreateAdminDto;
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'Foydalanuvchi nomi satr bolishi kerak' }),
+    (0, class_validator_1.MinLength)(3, { message: 'Foydalanuvchi nomi kamida 3 ta belgidan iborat bolishi kerak' }),
+    (0, class_validator_1.MaxLength)(30, { message: 'Foydalanuvchi nomi 30 belgidan oshmasligi kerak' }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Foydalanuvchi nomi bosh bolmasligi kerak' }),
+    __metadata("design:type", String)
+], CreateAdminDto.prototype, "username", void 0);
+__decorate([
+    (0, class_validator_1.IsEmail)({}, { message: 'Email notogri formatda' }),
+    (0, class_validator_1.MaxLength)(100, { message: 'Email 100 belgidan oshmasligi kerak' }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Email bosh bolmasligi kerak' }),
+    __metadata("design:type", String)
+], CreateAdminDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'Parol satr bolishi kerak' }),
+    (0, class_validator_1.MinLength)(8, { message: 'Parol kamida 8 ta belgidan iborat bolishi kerak' }),
+    (0, class_validator_1.MaxLength)(64, { message: 'Parol 64 belgidan oshmasligi kerak' }),
+    (0, class_validator_1.Matches)(/(?=.*[a-z])/, { message: 'Parolda kamida 1 ta kichik harf bolishi kerak' }),
+    (0, class_validator_1.Matches)(/(?=.*[A-Z])/, { message: 'Parolda kamida 1 ta katta harf bolishi kerak' }),
+    (0, class_validator_1.Matches)(/(?=.*[!@#$%^&*])/, { message: 'Parolda kamida 1 ta maxsus belgi (!@#$%^&*) bolishi kerak' }),
+    __metadata("design:type", String)
+], CreateAdminDto.prototype, "password", void 0);
+__decorate([
+    (0, class_validator_1.IsString)({ message: 'Role satr bolishi kerak' }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Role bosh bolmasligi kerak' }),
+    __metadata("design:type", String)
+], CreateAdminDto.prototype, "role", void 0);
 //# sourceMappingURL=create-admin.dto.js.map

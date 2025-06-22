@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AdminModule } from './admin/admin.module';
@@ -67,6 +68,9 @@ import { ProductImeg } from './product-imegs/model/product-imeg.model';
     ProductImegsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [{
+    provide: APP_PIPE,
+    useClass: ValidationPipe,
+  },AppService],
 })
 export class AppModule {}

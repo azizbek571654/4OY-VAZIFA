@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCreatorSocialDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateCreatorSocialDto {
     creator_id;
     social_id;
@@ -18,16 +19,19 @@ class CreateCreatorSocialDto {
 }
 exports.CreateCreatorSocialDto = CreateCreatorSocialDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 1, description: 'Creatorning ID raqami' }),
     (0, class_validator_1.IsInt)({ message: 'Creator ID butun son bolishi kerak' }),
     (0, class_validator_1.IsPositive)({ message: 'Creator ID musbat son bolishi kerak' }),
     __metadata("design:type", Number)
 ], CreateCreatorSocialDto.prototype, "creator_id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 2, description: 'Social media platformasi ID raqami' }),
     (0, class_validator_1.IsInt)({ message: 'Social ID butun son bolishi kerak' }),
     (0, class_validator_1.IsPositive)({ message: 'Social ID musbat son bolishi kerak' }),
     __metadata("design:type", Number)
 ], CreateCreatorSocialDto.prototype, "social_id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'https://instagram.com/example', description: 'Social URL manzili' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'URL bosh bolmasligi kerak' }),
     __metadata("design:type", String)
 ], CreateCreatorSocialDto.prototype, "url", void 0);

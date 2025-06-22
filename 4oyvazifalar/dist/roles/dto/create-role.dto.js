@@ -11,18 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateRoleDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateRoleDto {
     value;
     destcription;
 }
 exports.CreateRoleDto = CreateRoleDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'ADMIN', description: 'Rol nomi (masalan: ADMIN, USER)' }),
     (0, class_validator_1.IsString)({ message: 'Role nomi satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Role nomi bosh bolmasligi kerak' }),
     (0, class_validator_1.MaxLength)(50, { message: 'Role nomi 50 belgidan oshmasligi kerak' }),
     __metadata("design:type", String)
 ], CreateRoleDto.prototype, "value", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Admin foydalanuvchi huquqlari', description: 'Rol tavsifi' }),
     (0, class_validator_1.IsString)({ message: 'Tavsif satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Tavsif bosh bolmasligi kerak' }),
     (0, class_validator_1.MaxLength)(255, { message: 'Tavsif 255 belgidan oshmasligi kerak' }),

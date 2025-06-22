@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateSocialDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateSocialDto {
     title;
@@ -17,12 +18,14 @@ class CreateSocialDto {
 }
 exports.CreateSocialDto = CreateSocialDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Instagram', description: 'Ijtimoiy tarmoq nomi' }),
     (0, class_validator_1.IsString)({ message: 'Sarlavha satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Sarlavha bosh bolmasligi kerak' }),
     (0, class_validator_1.MaxLength)(100, { message: 'Sarlavha 100 belgidan oshmasligi kerak' }),
     __metadata("design:type", String)
 ], CreateSocialDto.prototype, "title", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Rasm va video ulashish platformasi', description: 'Ijtimoiy tarmoq tavsifi' }),
     (0, class_validator_1.IsString)({ message: 'Tavsif satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Tavsif bosh bolmasligi kerak' }),
     (0, class_validator_1.MaxLength)(255, { message: 'Tavsif 255 belgidan oshmasligi kerak' }),

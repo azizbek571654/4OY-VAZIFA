@@ -11,17 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateNotificationDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateNotificationDto {
     user_id;
     message;
 }
 exports.CreateNotificationDto = CreateNotificationDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 1, description: 'Xabarni oluvchi foydalanuvchi ID raqami' }),
     (0, class_validator_1.IsInt)({ message: 'User ID butun son bolishi kerak' }),
     (0, class_validator_1.IsPositive)({ message: 'User ID musbat son bolishi kerak' }),
     __metadata("design:type", Number)
 ], CreateNotificationDto.prototype, "user_id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Sizga yangi xabar bor', description: 'Xabar matni' }),
     (0, class_validator_1.IsString)({ message: 'Xabar matni satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Xabar matni bosh bolmasligi kerak' }),
     (0, class_validator_1.MaxLength)(300, { message: 'Xabar matni 300 belgidan oshmasligi kerak' }),

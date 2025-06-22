@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAdminDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateAdminDto {
     username;
     email;
@@ -19,6 +20,10 @@ class CreateAdminDto {
 }
 exports.CreateAdminDto = CreateAdminDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'admin123',
+        description: 'Foydalanuvchi nomi, noyob bolishi kerak',
+    }),
     (0, class_validator_1.IsString)({ message: 'Foydalanuvchi nomi satr bolishi kerak' }),
     (0, class_validator_1.MinLength)(3, { message: 'Foydalanuvchi nomi kamida 3 ta belgidan iborat bolishi kerak' }),
     (0, class_validator_1.MaxLength)(30, { message: 'Foydalanuvchi nomi 30 belgidan oshmasligi kerak' }),
@@ -26,12 +31,20 @@ __decorate([
     __metadata("design:type", String)
 ], CreateAdminDto.prototype, "username", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'admin@example.com',
+        description: 'Email manzili, togri formatda bolishi kerak',
+    }),
     (0, class_validator_1.IsEmail)({}, { message: 'Email notogri formatda' }),
     (0, class_validator_1.MaxLength)(100, { message: 'Email 100 belgidan oshmasligi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Email bosh bolmasligi kerak' }),
     __metadata("design:type", String)
 ], CreateAdminDto.prototype, "email", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'Secure@123',
+        description: 'Kuchli parol: katta va kichik harflar, raqamlar va maxsus belgilarni oz ichiga olgan',
+    }),
     (0, class_validator_1.IsString)({ message: 'Parol satr bolishi kerak' }),
     (0, class_validator_1.MinLength)(8, { message: 'Parol kamida 8 ta belgidan iborat bolishi kerak' }),
     (0, class_validator_1.MaxLength)(64, { message: 'Parol 64 belgidan oshmasligi kerak' }),
@@ -41,6 +54,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateAdminDto.prototype, "password", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'ADMIN',
+        description: 'Rol nomi, tizimdagi mavjud rollardan biri',
+    }),
     (0, class_validator_1.IsString)({ message: 'Role satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Role bosh bolmasligi kerak' }),
     __metadata("design:type", String)

@@ -11,17 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateProductImegDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateProductImegDto {
     product_id;
     img_url;
 }
 exports.CreateProductImegDto = CreateProductImegDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 7, description: 'Mahsulotga tegishli ID raqam' }),
     (0, class_validator_1.IsInt)({ message: 'Product ID butun son bolishi kerak' }),
     (0, class_validator_1.IsPositive)({ message: 'Product ID musbat bolishi kerak' }),
     __metadata("design:type", Number)
 ], CreateProductImegDto.prototype, "product_id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'https://example.com/image.jpg', description: 'Mahsulot rasm URL manzili' }),
     (0, class_validator_1.IsString)({ message: 'Rasm URL satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Rasm URL bosh bolmasligi kerak' }),
     (0, class_validator_1.IsUrl)({}, { message: 'Rasm URL notogri formatda' }),

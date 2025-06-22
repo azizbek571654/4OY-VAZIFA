@@ -1,12 +1,24 @@
 import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   try {
-    const PORT = process.env.PORT || 3000;
     const app = await NestFactory.create(AppModule);
+
+    const PORT = process.env.PORT || 3000;
     app.useGlobalPipes(new ValidationPipe());
+
+    const config = new DocumentBuilder()
+    .setTitle('Donate')
+    .setDescription('Nestjs RESTFULL API')
+    .setVersion('1.0')
+    .addTag('Nestjs, Valudators, User roles, Autharization')
+    .build();
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, documentFactory);
+
     await app.listen(PORT, () => {
       console.log(`server running on http://localhost:${PORT}`);
     });

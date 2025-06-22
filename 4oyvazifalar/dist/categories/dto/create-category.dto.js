@@ -11,12 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCategoryDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateCategoryDto {
     name;
     description;
 }
 exports.CreateCategoryDto = CreateCategoryDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'maishiy texnika ',
+        description: 'category nomi, noyob bolishi kerak',
+    }),
     (0, class_validator_1.IsString)({ message: 'Kategoriya nomi satr bolishi kerak' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Kategoriya nomi bosh bolmasligi kerak' }),
     (0, class_validator_1.MinLength)(2, { message: 'Kategoriya nomi kamida 2 belgidan iborat bolishi kerak' }),
@@ -24,6 +29,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateCategoryDto.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'maishiy texnika faqatgina uy jihozlari ',
+        description: 'fikir mulohaza ',
+    }),
     (0, class_validator_1.IsString)({ message: 'Tavsif satr bolishi kerak' }),
     (0, class_validator_1.MaxLength)(255, { message: 'Tavsif 255 belgidan oshmasligi kerak' }),
     __metadata("design:type", String)

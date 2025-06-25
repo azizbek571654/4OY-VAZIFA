@@ -12,6 +12,10 @@ import { Notification } from '../../notifications/model/notification.model';
 import { Roles } from '../../roles/model/role.model';
 import { UserRole } from './user-role.model';
 import { Product } from '../../product/model/product.model';
+import { Payment } from '../../payment/model/payment.model';
+import { ProductOrder } from '../../product-orders/model/product-order.model';
+import { ProductReweiw } from '../../product-reweiws/model/product-reweiw.model';
+// import { ProductModule } from '../../product/product.module';
 
 @Table({ tableName: 'admins' })
 export class Admin extends Model<
@@ -54,8 +58,17 @@ export class Admin extends Model<
   notification: Notification;
 
   @BelongsToMany(() => Roles, () => UserRole)
-  Roles: Roles[];
+  roles: Roles[];
 
   @HasMany(() => Product)
   product: Product;
+
+  @HasMany(() => Payment)
+  payment: Payment;
+
+  @HasMany(() => ProductOrder)
+  productOrder: ProductOrder;
+  
+  @HasMany(() => ProductReweiw)
+  productReweiw: ProductReweiw;
 }

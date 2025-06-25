@@ -1,4 +1,5 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { ProductOrder } from '../../product-orders/model/product-order.model';
 
 @Table({ tableName: 'kuriers' })
 export class Kurier extends Model<
@@ -31,4 +32,7 @@ export class Kurier extends Model<
     allowNull: false,
   })
   status: string;
+
+  @HasMany(() => ProductOrder)
+  productOrder: ProductOrder;
 }

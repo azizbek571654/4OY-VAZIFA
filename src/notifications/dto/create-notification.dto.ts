@@ -1,9 +1,18 @@
-import { IsInt, IsPositive, IsString, IsNotEmpty, MaxLength } from 'class-validator';
+import {
+  IsInt,
+  IsPositive,
+  IsString,
+  IsNotEmpty,
+  MaxLength,
+} from 'class-validator';
 import { Notification } from '../model/notification.model';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateNotificationDto implements Partial<Notification> {
-  @ApiProperty({ example: 1, description: 'Xabarni oluvchi foydalanuvchi ID raqami' })
+  @ApiProperty({
+    example: 1,
+    description: 'Xabarni oluvchi foydalanuvchi ID raqami',
+  })
   @IsInt({ message: 'User ID butun son bolishi kerak' })
   @IsPositive({ message: 'User ID musbat son bolishi kerak' })
   user_id: number;

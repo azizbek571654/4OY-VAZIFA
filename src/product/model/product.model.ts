@@ -11,6 +11,7 @@ import { CreateProductDto } from '../dto/create-product.dto';
 import { Admin } from '../../admin/model/admin.model';
 import { ProductImeg } from '../../product-imegs/model/product-imeg.model';
 import { Category } from '../../categories/model/category.model';
+import { ProductReweiw } from '../../product-reweiws/model/product-reweiw.model';
 
 @Table({ tableName: 'products' })
 export class Product extends Model<Product, CreateProductDto> {
@@ -78,4 +79,7 @@ export class Product extends Model<Product, CreateProductDto> {
 
   @HasMany(() => ProductImeg)
   productImeg: ProductImeg;
+
+  @HasMany(() => ProductReweiw)
+    productReweiw: ProductReweiw;
 }

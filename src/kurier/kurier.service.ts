@@ -28,7 +28,7 @@ export class KurierService {
     }
   }
 
-  async findOne(id: number) {
+  async findOneKURIER(id: number) {
     try {
       return await this.KurierModel.findByPk(id);
     } catch (error) {

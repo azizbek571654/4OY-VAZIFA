@@ -8,11 +8,17 @@ export class CreateCreatorSocialDto implements Partial<CreatorSocial> {
   @IsPositive({ message: 'Creator ID musbat son bolishi kerak' })
   creator_id: number;
 
-  @ApiProperty({ example: 2, description: 'Social media platformasi ID raqami' })
+  @ApiProperty({
+    example: 2,
+    description: 'Social media platformasi ID raqami',
+  })
   @IsInt({ message: 'Social ID butun son bolishi kerak' })
   @IsPositive({ message: 'Social ID musbat son bolishi kerak' })
   social_id: number;
-  @ApiProperty({ example: 'https://instagram.com/example', description: 'Social URL manzili' })
+  @ApiProperty({
+    example: 'https://instagram.com/example',
+    description: 'Social URL manzili',
+  })
   @IsNotEmpty({ message: 'URL bosh bolmasligi kerak' })
   url: string;
 }

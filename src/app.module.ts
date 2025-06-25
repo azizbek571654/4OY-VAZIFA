@@ -25,6 +25,14 @@ import { ProductModule } from './product/product.module';
 import { ProductImegsModule } from './product-imegs/product-imegs.module';
 import { Product } from './product/model/product.model';
 import { ProductImeg } from './product-imegs/model/product-imeg.model';
+import { PaymentModule } from './payment/payment.module';
+import { WithdrawsModule } from './withdraws/withdraws.module';
+import { ProductOrdersModule } from './product-orders/product-orders.module';
+import { SavedItemsModule } from './saved-items/saved-items.module';
+import { ProductReweiwsModule } from './product-reweiws/product-reweiws.module';
+import { Payment } from './payment/model/payment.model';
+import { AuthModule } from './auth/auth.module';
+import { ProductOrder } from './product-orders/model/product-order.model';
 
 @Module({
   imports: [
@@ -53,7 +61,9 @@ import { ProductImeg } from './product-imegs/model/product-imeg.model';
         Roles,
         UserRole,
         Product,
-        ProductImeg
+        ProductImeg,
+        Payment,
+        ProductOrder,
       ],
     }),
     AdminModule,
@@ -66,11 +76,20 @@ import { ProductImeg } from './product-imegs/model/product-imeg.model';
     RolesModule,
     ProductModule,
     ProductImegsModule,
+    PaymentModule,
+    WithdrawsModule,
+    ProductOrdersModule,
+    SavedItemsModule,
+    ProductReweiwsModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [{
-    provide: APP_PIPE,
-    useClass: ValidationPipe,
-  },AppService],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+    AppService,
+  ],
 })
 export class AppModule {}

@@ -1,9 +1,16 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Injectable,
+  HttpException,
+  HttpStatus,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Admin } from './model/admin.model';
 import { RolesService } from '../roles/roles.service';
+import { Roles } from '../roles/model/role.model';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @Injectable()
 export class AdminService {
@@ -26,7 +33,7 @@ export class AdminService {
         );
       }
       const newAdmin = await this.AdminModel.create(createAdminDto);
-      await newAdmin.$set('Roles', role.id);
+      await newAdmin.$set('roles', role.id);
       await newAdmin.save();
       return {
         success: true,
@@ -99,6 +106,18 @@ export class AdminService {
     }
   }
 
+  async getUserByMail(email: string) {
+    const user = await this.AdminModel.findOne({
+      where: { email },
+      include: {
+        model: Roles,
+        attributes: ['id', 'value'],
+        // through:[attributes: []]
+      },
+    });
+    return user?.dataValues;
+  }
+
   async update(id: number, updateAdminDto: UpdateAdminDto) {
     try {
       const admin = await this.AdminModel.findByPk(id);
@@ -161,5 +180,51 @@ export class AdminService {
             HttpStatus.INTERNAL_SERVER_ERROR,
           );
     }
+  }
+
+  async addRole(addRoleDto: AddRoleDto) {
+    const user = await this.AdminModel.findByPk(addRoleDto.userId);
+    if (!user) {
+      throw new BadRequestException('bunday foydalanuvchi mavjud emas');
+    }
+    const role = await this.rolesService.findRoleByValue(addRoleDto.value);
+    if (!role) {
+      throw new HttpException(
+        {
+          success: false,
+          message: 'role topilmadi',
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    await user.$add('roles', role.id);
+
+    const updatedUser = await this.AdminModel.findByPk(addRoleDto.userId, {
+      include: { all: true },
+    });
+    return updatedUser;
+  }
+
+  async removeRole(addRoleDto: AddRoleDto) {
+    const user = await this.AdminModel.findByPk(addRoleDto.userId);
+    if (!user) {
+      throw new BadRequestException('bunday foydalanuvchi mavjud emas');
+    }
+    const role = await this.rolesService.findRoleByValue(addRoleDto.value);
+    if (!role) {
+      throw new HttpException(
+        {
+          success: false,
+          message: 'role topilmadi',
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    await user.$remove('roles', role.id);
+
+    const updatedUser = await this.AdminModel.findByPk(addRoleDto.userId, {
+      include: { all: true },
+    });
+    return updatedUser;
   }
 }

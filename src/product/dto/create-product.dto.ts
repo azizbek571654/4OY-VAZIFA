@@ -12,7 +12,10 @@ import { Product } from '../model/product.model';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto implements Partial<Product> {
-  @ApiProperty({ example: 2, description: 'Mahsulot yaratuvchisining ID raqami' })
+  @ApiProperty({
+    example: 2,
+    description: 'Mahsulot yaratuvchisining ID raqami',
+  })
   @IsInt({ message: 'Creator ID butun son bolishi kerak' })
   @IsPositive({ message: 'Creator ID musbat son bolishi kerak' })
   creator_id: number;
@@ -23,16 +26,19 @@ export class CreateProductDto implements Partial<Product> {
   @MaxLength(100, { message: 'Mahsulot nomi 100 belgidan oshmasligi kerak' })
   name: string;
 
-  @ApiProperty({ example: 'Yengil va qulay sport oyoq kiyim', description: 'Mahsulot tavsifi' })
+  @ApiProperty({
+    example: 'Yengil va qulay sport oyoq kiyim',
+    description: 'Mahsulot tavsifi',
+  })
   @IsString({ message: 'Tavsif satr bolishi kerak' })
   @IsOptional()
   @MaxLength(255, { message: 'Tavsif 255 belgidan oshmasligi kerak' })
   description: string;
 
-  @ApiProperty({ example: 3, description: 'Mahsulotga tegishli rasmlar soni' })
-  @IsInt({ message: 'Rasm soni butun son bolishi kerak' })
-  @IsOptional()
-  @Min(0, { message: 'Rasm soni 0 yoki undan katta bolishi kerak' })
+  // @ApiProperty({ example: 3, description: 'Mahsulotga tegishli rasmlar soni' })
+  // @IsInt({ message: 'Rasm soni butun son bolishi kerak' })
+  // @IsOptional()
+  // @Min(0, { message: 'Rasm soni 0 yoki undan katta bolishi kerak' })
   product_images: number;
 
   @ApiProperty({ example: 15, description: 'Ombordagi mavjud soni' })

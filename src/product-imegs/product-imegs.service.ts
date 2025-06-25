@@ -4,6 +4,7 @@ import { UpdateProductImegDto } from './dto/update-product-imeg.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { ProductImeg } from './model/product-imeg.model';
 import { ProductService } from '../product/product.service';
+import { FilesService } from '../files/files.service';
 
 @Injectable()
 export class ProductImegsService {
@@ -11,8 +12,9 @@ export class ProductImegsService {
     @InjectModel(ProductImeg)
     private readonly productImegsModel: typeof ProductImeg,
     private readonly productservise: ProductService,
+    private readonly fileSevise: FilesService,
   ) {}
-  async create(createProductImegDto: CreateProductImegDto) {
+  async create(createProductImegDto: CreateProductImegDto, img_url: any) {
     try {
       const product = await this.productservise.findOnePRODUCT(
         createProductImegDto.product_id,
@@ -27,8 +29,11 @@ export class ProductImegsService {
         );
       }
 
-      const newProduct =
-        await this.productImegsModel.create(createProductImegDto);
+      const fileName = await this.fileSevise.saveFile(img_url);
+      const newProduct = await this.productImegsModel.create({
+        ...createProductImegDto,
+        img_url: fileName,
+      });
       return {
         success: true,
         message: 'Product-IMG yaratildi',

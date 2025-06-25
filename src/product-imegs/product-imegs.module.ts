@@ -5,9 +5,15 @@ import { Product } from '../product/model/product.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ProductImeg } from './model/product-imeg.model';
 import { ProductModule } from '../product/product.module';
+import { FilesModule } from '../files/files.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Product, ProductImeg]), ProductModule],
+  imports: [
+    SequelizeModule.forFeature([Product, ProductImeg]),
+    // forwardRef(() => ),
+    FilesModule,
+    ProductModule,
+  ],
   controllers: [ProductImegsController],
   providers: [ProductImegsService],
   exports: [ProductImegsService],

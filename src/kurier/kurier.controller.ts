@@ -27,7 +27,7 @@ export class KurierController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.kurierService.findOne(+id);
+    return this.kurierService.findOneKURIER(+id);
   }
 
   @Patch(':id')

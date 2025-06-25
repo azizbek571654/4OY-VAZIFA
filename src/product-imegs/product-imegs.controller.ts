@@ -6,18 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ProductImegsService } from './product-imegs.service';
 import { CreateProductImegDto } from './dto/create-product-imeg.dto';
 import { UpdateProductImegDto } from './dto/update-product-imeg.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('product-imegs')
 export class ProductImegsController {
   constructor(private readonly productImegsService: ProductImegsService) {}
 
   @Post()
-  create(@Body() createProductImegDto: CreateProductImegDto) {
-    return this.productImegsService.create(createProductImegDto);
+  @UseInterceptors(FileInterceptor('img_url'))
+  create(
+    @Body() createProductImegDto: CreateProductImegDto,
+    @UploadedFile() img_url: any,
+  ) {
+    return this.productImegsService.create(createProductImegDto, img_url);
   }
 
   @Get()

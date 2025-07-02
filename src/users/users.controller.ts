@@ -5,6 +5,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from "../common/guard/user.guard";
 import { SelfGuart } from '../common/guard/self.guard';
 import { IsCreatorGuard } from '../common/guard/isCreator.guard';
+import { PhoneUserDto } from './dto/create-user.dto copy';
 
 @Controller("users")
 export class UsersController {
@@ -15,6 +16,13 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
+  
+  // @UseGuards(JwtAuthGuard, SelfGuart, IsCreatorGuard)
+  @Post("new-otp")
+  newOtp(@Body() phoneUserDto: PhoneUserDto) {
+    return this.usersService.newOtp(phoneUserDto);
+  }
+  
   @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {

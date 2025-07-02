@@ -8,10 +8,17 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { User } from "./models/user.model";
 import * as bcrypt from "bcrypt";
+import { PhoneUserDto } from "./dto/create-user.dto copy";
+import * as otpGenerator from "otp-generator"
+import { BotService } from "../bot/bot.service";
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private readonly userModel: typeof User) {}
+  constructor(
+    @InjectModel(User) 
+    private readonly userModel: typeof User,
+    private readonly botServise : BotService
+  ) {}
   async create(createUserDto: CreateUserDto) {
     const { password, confirm_password } = createUserDto;
     if (password !== confirm_password) {
@@ -94,5 +101,23 @@ export class UsersService {
       }
     );
     return uddatedUser
+  }
+
+  async newOtp(phoneUserDto: PhoneUserDto){
+    const phone_number = phoneUserDto.phone
+    const otp = otpGenerator.generate(4, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+      digits: true
+    })
+    const isSend = await this.botServise.sentOTP(phone_number, otp)
+    if (isSend) {
+      throw new BadRequestException("Avval botdan royhatdan oting")
+    }
+
+    return { 
+      message: "OTP botga yuborildi"
+    }
   }
 }

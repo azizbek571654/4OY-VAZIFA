@@ -3,6 +3,8 @@ import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { IsCreatorGuard } from '../common/guard/isCreator.guard';
+import { JwtAuthGuard } from '../common/guard/user.guard';
+import { SelfGuart } from '../common/guard/self.guard';
 
 @Controller("books")
 export class BooksController {
@@ -14,22 +16,25 @@ export class BooksController {
     return this.booksService.create(createBookDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.booksService.findAll();
   }
-  
+
+  @UseGuards(JwtAuthGuard, SelfGuart)
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.booksService.findOne(+id);
   }
-  
+
   @UseGuards(IsCreatorGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(@Param("id") id: string, @Body() updateBookDto: UpdateBookDto) {
     return this.booksService.update(+id, updateBookDto);
   }
-  
+
   @UseGuards(IsCreatorGuard)
   @Delete(":id")
   remove(@Param("id") id: string) {

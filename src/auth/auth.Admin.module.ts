@@ -5,11 +5,12 @@ import { JwtModule } from "@nestjs/jwt";
 import { UsersModule } from "../users/users.module";
 import { MailModule } from "../mail/mail.module";
 import { AdminModule } from "../admin/admin.module";
+import { JwtAuthGuard } from "../common/guard/user.guard";
 
 @Module({
-  imports: [JwtModule.register({}),UsersModule, MailModule, AdminModule],
+  imports: [JwtModule.register({}), UsersModule, MailModule, AdminModule],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService,],
   exports: [AuthService],
 })
 export class AuthAdminModule {}

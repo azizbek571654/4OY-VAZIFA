@@ -110,7 +110,7 @@ export class AuthService {
       if (!UserData) {
         throw new ForbiddenException("User not Verifiying");
       }
-      await this.usersService.UdateRefreshToken(UserData.id, "");
+      await this.usersService.uptadeRefreshToken(UserData.id, "");
 
       res.clearCookie("refreshToken");
       return {
@@ -148,7 +148,7 @@ export class AuthService {
     const { accessToken, refreshToken } = await this.generateTokens(user);
 
     const refresh_token = await bcrypt.hash(refreshToken, 7);
-    await this.usersService.UdateRefreshToken(user.id, refresh_token);
+    await this.usersService.uptadeRefreshToken(user.id, refresh_token);
 
     res.cookie("refreshToken", refreshToken, {
       maxAge: Number(process.env.COOKIE_TIME),

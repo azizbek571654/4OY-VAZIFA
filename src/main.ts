@@ -4,10 +4,11 @@ import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as cookiePrser from "cookie-parser"
 
-async function start() {
+async function start() {            //15:17
   try {
     const PORT = process.env.PORT ?? 3030;
     const app = await NestFactory.create(AppModule);
+    
     app.useGlobalPipes(new ValidationPipe());
     app.use(cookiePrser())
     app.setGlobalPrefix("api");
@@ -28,4 +29,4 @@ async function start() {
     console.log(error);
   }
 }
-start();
+start();                    //15:17  

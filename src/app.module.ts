@@ -26,6 +26,9 @@ import { BookVersion } from "./book-version/model/book-version.model";
 import { BooksModule } from './books/books.module';
 import { Book } from "./books/model/book.model";
 import { Bot } from "./bot/models/bot.model";
+import { BookCollection } from "./book-collection/model/book-collection.model";
+import { BookMark } from "./book-marks/model/book-mark.model";
+import { Collection } from "./collection/model/collection.model";
 
 
 @Module({
@@ -59,7 +62,10 @@ import { Bot } from "./bot/models/bot.model";
         AudioPart,
         BookVersion,
         Book,
-        // Bot,
+        Bot,
+        BookCollection,
+        BookMark,
+        Collection
       ],
       autoLoadModels: true,
       logging: false,

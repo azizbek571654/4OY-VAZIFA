@@ -3,8 +3,10 @@ import { AudioPartsService } from './audio-parts.service';
 import { CreateAudioPartDto } from './dto/create-audio-part.dto';
 import { UpdateAudioPartDto } from './dto/update-audio-part.dto';
 import { IsCreatorGuard } from '../common/guard/isCreator.guard';
+import { JwtAuthGuard } from '../common/guard/user.guard';
+import { SelfGuart } from '../common/guard/self.guard';
 
-@Controller('audio-parts')
+@Controller("audio-parts")
 export class AudioPartsController {
   constructor(private readonly audioPartsService: AudioPartsService) {}
 
@@ -13,26 +15,32 @@ export class AudioPartsController {
   create(@Body() createAudioPartDto: CreateAudioPartDto) {
     return this.audioPartsService.create(createAudioPartDto);
   }
-  
+
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.audioPartsService.findAll();
   }
-  
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+
+  @UseGuards(JwtAuthGuard, SelfGuart)
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.audioPartsService.findOne(+id);
   }
-  
+
   @UseGuards(IsCreatorGuard)
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAudioPartDto: UpdateAudioPartDto) {
+  @UseGuards(JwtAuthGuard)
+  @Patch(":id")
+  update(
+    @Param("id") id: string,
+    @Body() updateAudioPartDto: UpdateAudioPartDto
+  ) {
     return this.audioPartsService.update(+id, updateAudioPartDto);
   }
-  
+
   @UseGuards(IsCreatorGuard)
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.audioPartsService.remove(+id);
   }
 }

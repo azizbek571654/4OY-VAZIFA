@@ -3,6 +3,8 @@ import { CategoryService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { IsCreatorGuard } from '../common/guard/isCreator.guard';
+import { JwtAuthGuard } from '../common/guard/user.guard';
+import { SelfGuart } from '../common/guard/self.guard';
 
 @Controller("categories")
 export class CategoriesController {
@@ -13,17 +15,19 @@ export class CategoriesController {
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoriesService.create(createCategoryDto);
   }
-
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.categoriesService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard, SelfGuart)
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.categoriesService.findOne(+id);
   }
   @UseGuards(IsCreatorGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(
     @Param("id") id: string,

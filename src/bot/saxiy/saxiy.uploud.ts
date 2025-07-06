@@ -1,5 +1,4 @@
 import { Context, Markup } from 'telegraf';
-import { BotService } from '../bot.service';
 import {
   Action,
   Command,
@@ -17,11 +16,16 @@ export class SaxiyUptade {
 
   @Hears('Saxiy')
   async handleText(@Ctx() ctx: Context) {
+    console.log('✅ saxiy tugmasi bosildi');
     await this.saxiyService.Saxiymenu(ctx);
   }
-  @Hears('new')
+  @Hears('Muruvat qilish')
   async handlenew(@Ctx() ctx: Context) {
     await this.saxiyService.Saxiynew(ctx);
+  }
+  @Hears('Asosiy menu')
+  async handleMainMenu(@Ctx() ctx: Context) {
+    await this.saxiyService.goToMainMenu(ctx);
   }
 
   @On('text')

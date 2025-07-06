@@ -97,48 +97,4 @@ export class BotService {
       console.log(`Error on Contact ()======||:::::::::::::::> ${error}`);
     }
   }
-
-//   async onStop(ctx: Context) {
-//     try {
-//       const user_id = ctx.from?.id;
-//       const user = await this.botModel.findByPk(user_id);
-//       if (!user) {
-//         await ctx.replyWithHTML(`Siz avval ro'yxatdan o'tmagansiz!`, {
-//           ...Markup.removeKeyboard(),
-//         });
-//       } else if (user.status) {
-//         user.status = false;
-//         user.phone_number = '';
-//         await user.save();
-//         await this.bot.telegram.sendChatAction(user.user_id, 'typing');
-
-//         await ctx.replyWithHTML(
-//           `Siz vaqtincha botdan chiqib ketdingiz. Qayta faollashtirish uchun <b>/start</b> tugmasini bosing`,
-//           {
-//             ...Markup.keyboard([['/start']]).resize(),
-//           },
-//         );
-//       }
-//     } catch (error) {
-//       console.log(`Error on Stop: `, error);
-//     }
-//   }
-
-//   async sentOtp(
-//     phone_number: string,
-//     OTP: string,
-//   ): Promise<boolean | undefined> {
-//     try {
-//       const user = await this.botModel.findOne({ where: { phone_number } });
-//       if (!user || !user.status) {
-//         return false;
-//       }
-
-//       await this.bot.telegram.sendMessage(user.user_id, `verify code ${OTP}`);
-//       return true;
-//     } catch (error) {
-//       console.log(`Error on SentOTP:::|||| `, error);
-//     }
-//   }
-
 }

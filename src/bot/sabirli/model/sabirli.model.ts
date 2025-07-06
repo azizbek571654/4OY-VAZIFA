@@ -6,14 +6,13 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-interface ISaxiy {
+interface ISabirli {
   user_id: number;
-
   last_state: string;
 }
 
-@Table({ tableName: 'Saxiy', timestamps: true })
-export class Saxiy extends Model<Saxiy, ISaxiy> {
+@Table({ tableName: 'Sabirli', timestamps: true })
+export class Sabirli extends Model<Sabirli, ISabirli> {
   @Column({
     type: DataType.BIGINT,
     autoIncrement: true,
@@ -32,6 +31,16 @@ export class Saxiy extends Model<Saxiy, ISaxiy> {
   declare name: string;
 
   @Column({
+    type: DataType.INTEGER,
+  })
+  declare age: number;
+  
+  @Column({
+    type: DataType.STRING,
+  })
+  declare gender: string;
+
+  @Column({
     type: DataType.STRING,
   })
   declare address: string;
@@ -40,6 +49,11 @@ export class Saxiy extends Model<Saxiy, ISaxiy> {
     type: DataType.STRING,
   })
   declare product: string;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  declare destcription: string;
 
   @Column({
     type: DataType.STRING,
@@ -56,3 +70,4 @@ export class Saxiy extends Model<Saxiy, ISaxiy> {
   })
   declare last_state: string;
 }
+
